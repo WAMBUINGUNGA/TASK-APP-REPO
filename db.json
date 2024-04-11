@@ -1,0 +1,10 @@
+{
+    "blogPosts": [
+      { "id": 1, "title": "First Post", "content": "Content of the first post", "author": "MUNENE" },
+      { "id": 2, "title": "Second Post", "content": "Content of the second post", "author": "MUCHIRI" },
+      { "id": 3, "title": "Third Post", "content": "Content of the third post", "author": "JOHN" },
+      { "id": 4, "title": "Fourth Post", "content": "Content of the fourth post", "author": "ZACH" },
+      { "id": 5, "title": "Fifth Post", "content": "Content of the fifth post", "author": "NGIRIA" }
+    ]
+  }
+  

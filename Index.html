@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,51 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Blog</title>
     <link rel="stylesheet" href="./style .css">
-
 </head>
 <body>
     <div class="container">
         <h1>Task Blog</h1>
-
         <!-- Blog heading with image -->
         <h2 class="blog-heading">
-            <img src="pascal.jpg" alt=""> <!-- Corrected image source -->
+            <!-- <img src="pascal.jpg" alt="small">  -->
         </h2>
-
         <!-- Form to add a new blog post -->
         <form id="addBlogPostForm" class="blogposts">
             <input type="text" id="blogTitle" placeholder="Enter Title">
             <textarea id="blogContent" placeholder="Enter Content"></textarea>
             <button type="submit">Add Blog Post</button>
         </form>
-
         <!-- Container to display all blog posts -->
         <div id="blogPostsContainer">
             <!-- Blog posts will be displayed here -->
         </div>
-
         <!-- Task list -->
         <div class="row">
             <ul id="list-container">
-                <li class="checked">Onboarding Process</li>
+                <li class=> TASKS-Onboarding Process</li>
                 <li>Flight booking</li>
                 <li>Flight check-in</li>
                 <li>Flight boarding</li>
                 <li>Baggage recovery</li>
             </ul>
         </div>
-
         <!-- Comment form -->
         <form id="comment-form" class="comment-form">
             <input class="comment-input" type="text" name="comment" id="comment" placeholder="Add a comment...">
             <button class="comment-button" type="submit">Post</button>
         </form>
-
         <!-- Like button -->
-        <span id="like-count" class="likes">0 likes</span>
+        <span id="like-count" class="likes">4 likes</span>
         <button id="like-button" class="like-button">♥</button>
     </div>
-
-    <script src="./index.js"></script>
+    <script src="./Index.js"></script>
 </body>
 </html>
