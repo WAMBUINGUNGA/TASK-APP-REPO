@@ -1,10 +1,89 @@
 {
-    "blogPosts": [
-      { "id": 1, "title": "First Post", "content": "Content of the first post", "author": "MUNENE" },
-      { "id": 2, "title": "Second Post", "content": "Content of the second post", "author": "MUCHIRI" },
-      { "id": 3, "title": "Third Post", "content": "Content of the third post", "author": "JOHN" },
-      { "id": 4, "title": "Fourth Post", "content": "Content of the fourth post", "author": "ZACH" },
-      { "id": 5, "title": "Fifth Post", "content": "Content of the fifth post", "author": "NGIRIA" }
-    ]
-  }
-  
+  "tasks": [
+    {
+      "id": 1,
+      "type": "personal",
+      "description": "Complete laundry",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "type": "work",
+      "description": "Prepare presentation",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "type": "study",
+      "description": "Read Javascript",
+      "completed": false
+    },
+    {
+      "id": 4,
+      "type": "other",
+      "description": "Go for shopping",
+      "completed": true
+    },
+    {
+      "id": "8478",
+      "text": "Do homework",
+      "completed": false
+    },
+    {
+      "id": "1e37",
+      "completed": false
+    },
+    {
+      "id": "6ba3",
+      "completed": false
+    },
+    {
+      "id": "60ad",
+      "completed": false
+    },
+    {
+      "id": "1aa3",
+      "completed": false
+    },
+    {
+      "id": "fa3d",
+      "completed": false
+    },
+    {
+      "id": "5b17",
+      "completed": false
+    },
+    {
+      "id": "b0cd",
+      "completed": false
+    },
+    {
+      "id": "bace",
+      "completed": false
+    },
+    {
+      "id": "2f5a",
+      "completed": false
+    },
+    {
+      "id": "120e",
+      "completed": false
+    },
+    {
+      "id": "1f73",
+      "completed": false
+    },
+    {
+      "id": "5cd9",
+      "completed": false
+    },
+    {
+      "id": "0d11",
+      "completed": false
+    },
+    {
+      "id": "1f1e",
+      "completed": false
+    }
+  ]
+}

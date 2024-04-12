@@ -1,102 +1,110 @@
-let blogPosts = [];
-let likeCount = 4; // Initial count
-const url = "http://localhost:3000/blogPosts";
-
-// Function to display blog posts in the HTML
-const displayBlogPosts = () => {
-  const blogPostsContainer = document.getElementById("blogPostsContainer");
-  blogPostsContainer.innerHTML = ""; // Clear existing content
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      blogPosts = data;
-      blogPosts.forEach((post) => {
-        const postElement = document.createElement("div");
-        postElement.innerHTML = `
-            <h2>${post.title}</h2>
-            <p>${post.content}</p>
-            <p>Author: ${post.author}</p>
-            <button onclick="deleteBlogPost(${post.id})">Delete</button>
-            <button onclick="editBlogPost(${post.id})">Edit</button>
-        `;
-        blogPostsContainer.appendChild(postElement);
-      });
-    })
-    .catch(error => console.error("Error fetching blog posts:", error));
-};
-
-// Function to add a new blog post
-const addBlogPost = (title, content, author) => {
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ title, content, author })
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Failed to add blog post');
-    }
-    return response.json();
-  })
-  .then(() => {
-    displayBlogPosts();
-  })
-  .catch(error => console.error("Error adding blog post:", error));
-};
-
-// Function to delete a blog post
-const deleteBlogPost = (id) => {
-  fetch(`${url}/${id}`, {
-    method: 'DELETE'
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Failed to delete blog post');
-    }
-    return response.json();
-  })
-  .then(() => {
-    displayBlogPosts();
-  })
-  .catch(error => console.error("Error deleting blog post:", error));
-};
-
-// Function to edit a blog post
-const editBlogPost = (id) => {
-  const post = blogPosts.find((post) => post.id === id);
-  const newTitle = prompt("Enter new title:", post.title);
-  const newContent = prompt("Enter new content:", post.content);
-  const newAuthor = prompt("Enter new author:", post.author);
-  if (newTitle !== null && newContent !== null && newAuthor !== null) {
-    fetch(`${url}/${id}`, {
-      method: 'PUT',
+// Add task function
+function addTask(taskText) {
+    const task = {
+      text: taskText,
+      completed: false
+    };
+    
+    return fetch('http://localhost:3000/tasks', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ title: newTitle, content: newContent, author: newAuthor })
+      body: JSON.stringify(task)
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to edit blog post');
-      }
-      return response.json();
+    .then(response => response.json())
+    .then(data => {
+      // Add task to the list
+      addTaskToList(data);
+      return data; // Return the added task
     })
-    .then(() => {
-      displayBlogPosts();
-    })
-    .catch(error => console.error("Error editing blog post:", error));
+    .catch(error => console.error('Error adding task:', error));
   }
-};
-
-// Display initial blog posts
-displayBlogPosts();
-
-const handleLikeButton = () => {
-  likeCount++;
-  document.getElementById("like-count").textContent = `${likeCount} likes`;
-};
-
-const likeButton = document.getElementById("like-button");
-likeButton.addEventListener("click", handleLikeButton);
+  
+  // Function to add task to the task list
+  function addTaskToList(task) {
+    const taskView = document.querySelector('.taskView');
+    const card = document.createElement('div');
+    card.classList.add('card', 'border-success', 'mx-3', 'mt-3', 'mb-3');
+    card.style.maxWidth = '18rem';
+    
+    const cardHeader = document.createElement('div');
+    cardHeader.classList.add('card-header', 'bg-transparent', 'border-success');
+    const checkIcon = document.createElement('i');
+    checkIcon.classList.add('fa', 'fa-check-circle', 'mr-2', 'text-success');
+    cardHeader.appendChild(checkIcon);
+    const timesIcon = document.createElement('i');
+    timesIcon.classList.add('fa', 'fa-times-circle', 'mr-2', 'text-danger');
+    cardHeader.appendChild(timesIcon);
+    card.appendChild(cardHeader);
+    
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body', 'text-success');
+    const title = document.createElement('h5');
+    title.classList.add('card-title');
+    title.textContent = task.text;
+    cardBody.appendChild(title);
+    const description = document.createElement('p');
+    description.classList.add('card-text');
+    description.textContent = 'Some quick example text to build on the card title and make up the bulk of the card\'s content.';
+    cardBody.appendChild(description);
+    card.appendChild(cardBody);
+    
+    const cardFooter = document.createElement('div');
+    cardFooter.classList.add('card-footer', 'bg-transparent', 'border-success');
+    const trashIcon = document.createElement('i');
+    trashIcon.classList.add('fa', 'fa-trash-o', 'mr-2', 'text-danger');
+    cardFooter.appendChild(trashIcon);
+    const editIcon = document.createElement('i');
+    editIcon.classList.add('fa', 'fa-pencil-square-o', 'mr-2', 'text-primary');
+    cardFooter.appendChild(editIcon);
+    card.appendChild(cardFooter);
+    
+    taskView.appendChild(card);
+  }
+  
+  // Toggle task completion function
+  function toggleTaskCompleted(taskId) {
+    const taskCard = document.getElementById(taskId);
+    const isCompleted = taskCard.classList.toggle('completed');
+    
+    return fetch(`http://localhost:3000/tasks/${taskId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ completed: isCompleted })
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Update task in the local tasks array if needed
+      return data; // Return the updated task
+    })
+    .catch(error => console.error('Error updating task:', error));
+  }
+  
+  // Filter tasks function
+  function filterTasks(filterType) {
+    const filterMap = {
+      all: '',
+      completed: '?completed=true',
+      uncompleted: '?completed=false'
+    };
+  
+    return fetch(`http://localhost:3000/tasks${filterMap[filterType]}`)
+      .then(response => response.json())
+      .then(data => {
+        // Clear existing tasks
+        const taskView = document.querySelector('.taskView');
+        taskView.innerHTML = '';
+  
+        // Add filtered tasks to the list
+        data.forEach(task => {
+          addTaskToList(task);
+        });
+  
+        return data;
+      })
+      .catch(error => console.error('Error fetching tasks:', error));
+  }
+  
