@@ -1,29 +1,50 @@
-
-body {
-    background-color: #f8f9fa; /* Set background color */
+/* St/* Style for navbar */
+.navbar {
+    background-color: #343a40;
+    color: #ffffff;
+    
   }
   
-  .container-fluid {
-    text-align: center; /* Center align content */
-    padding-top: 50px; /* Add some padding from the top */
+  /* Style for main container */
+  .main {
+    margin-top: 20px;
   }
   
-  .taskForm {
-    background-color: #fff; /* Set background color for task form */
-    border-radius: 10px; /* Add border radius */
-    padding: 20px; /* Add padding */
-  }
-  
-  .taskView {
-    margin-top: 50px; /* Add margin from the top */
-  }
-  
+  /* Style for task card */
   .card {
-    margin-bottom: 20px; /* Add margin between cards */
+    border-radius: 10px;
   }
   
-  .complete,
-  .incomplete {
-    display: none; /* Initially hide complete and incomplete tasks */
+  /* Style for task view */
+  .taskView {
+    display: block;
+    flex-wrap: wrap;
+    justify-content: center;
   }
+  
+  /* Style for individual task card */
+  .card {
+    margin: 10px;
+  }
+  
+  /* Style for task title */
+  .card-title {
+    font-weight: bold;
+  }
+  
+  /* Style for task description */
+  .card-text {
+    color: #6c757d;
+  }
+  
+  /* Style for footer */
+  footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+  }
+  
+
+  
+  
   

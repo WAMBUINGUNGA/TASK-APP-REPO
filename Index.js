@@ -1,110 +1,138 @@
-// Add task function
-function addTask(taskText) {
-    const task = {
-      text: taskText,
-      completed: false
-    };
-    
-    return fetch('http://localhost:3000/tasks', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(task)
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Add task to the list
-      addTaskToList(data);
-      return data; // Return the added task
-    })
-    .catch(error => console.error('Error adding task:', error));
-  }
+document.addEventListener('DOMContentLoaded', function () {
   
-  // Function to add task to the task list
-  function addTaskToList(task) {
-    const taskView = document.querySelector('.taskView');
-    const card = document.createElement('div');
-    card.classList.add('card', 'border-success', 'mx-3', 'mt-3', 'mb-3');
-    card.style.maxWidth = '18rem';
-    
-    const cardHeader = document.createElement('div');
-    cardHeader.classList.add('card-header', 'bg-transparent', 'border-success');
-    const checkIcon = document.createElement('i');
-    checkIcon.classList.add('fa', 'fa-check-circle', 'mr-2', 'text-success');
-    cardHeader.appendChild(checkIcon);
-    const timesIcon = document.createElement('i');
-    timesIcon.classList.add('fa', 'fa-times-circle', 'mr-2', 'text-danger');
-    cardHeader.appendChild(timesIcon);
-    card.appendChild(cardHeader);
-    
-    const cardBody = document.createElement('div');
-    cardBody.classList.add('card-body', 'text-success');
-    const title = document.createElement('h5');
-    title.classList.add('card-title');
-    title.textContent = task.text;
-    cardBody.appendChild(title);
-    const description = document.createElement('p');
-    description.classList.add('card-text');
-    description.textContent = 'Some quick example text to build on the card title and make up the bulk of the card\'s content.';
-    cardBody.appendChild(description);
-    card.appendChild(cardBody);
-    
-    const cardFooter = document.createElement('div');
-    cardFooter.classList.add('card-footer', 'bg-transparent', 'border-success');
-    const trashIcon = document.createElement('i');
-    trashIcon.classList.add('fa', 'fa-trash-o', 'mr-2', 'text-danger');
-    cardFooter.appendChild(trashIcon);
-    const editIcon = document.createElement('i');
-    editIcon.classList.add('fa', 'fa-pencil-square-o', 'mr-2', 'text-primary');
-    cardFooter.appendChild(editIcon);
-    card.appendChild(cardFooter);
-    
-    taskView.appendChild(card);
-  }
-  
-  // Toggle task completion function
-  function toggleTaskCompleted(taskId) {
-    const taskCard = document.getElementById(taskId);
-    const isCompleted = taskCard.classList.toggle('completed');
-    
-    return fetch(`http://localhost:3000/tasks/${taskId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ completed: isCompleted })
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Update task in the local tasks array if needed
-      return data; // Return the updated task
-    })
-    .catch(error => console.error('Error updating task:', error));
-  }
-  
-  // Filter tasks function
-  function filterTasks(filterType) {
-    const filterMap = {
-      all: '',
-      completed: '?completed=true',
-      uncompleted: '?completed=false'
-    };
-  
-    return fetch(`http://localhost:3000/tasks${filterMap[filterType]}`)
-      .then(response => response.json())
-      .then(data => {
-        // Clear existing tasks
-        const taskView = document.querySelector('.taskView');
-        taskView.innerHTML = '';
-  
-        // Add filtered tasks to the list
-        data.forEach(task => {
-          addTaskToList(task);
-        });
-  
-        return data;
+    // Fetch Tasks
+    fetch("http://localhost:3000/tasks")
+      .then((data) => data.json())
+      .then((posts) => {
+        displayPosts(posts);
       })
-      .catch(error => console.error('Error fetching tasks:', error));
+      .catch((error) => {
+        console.error("Error fetching posts:", error);
+        alert("Failed to fetch posts");
+      });
+  
+    let cardsContainer = document.querySelector(".cardsContainer");
+  
+    function displayPosts(posts) {
+      let tasks = '';
+      posts.forEach((post) => {
+        cardsContainer.innerHTML += `
+          <div class="card">
+            <div class="card-header d-flex justify-content-between">
+            <div class=vital>
+              <i onclick="deletePost(${post.id})" class="fa fa-trash-o" style="color: red;"></i>
+              <i onclick="editPost(${post.id})" style="color: blue;" class="fa fa-pencil-square-o" data-bs-toggle="modal" data-bs-target="#editModal" aria-hidden="true"></i>
+            </div>
+            
+            
+            <i onclick="completeTask('${post.description}')" class="fa fa-check" aria-hidden="true" style="color: green;"></i>
+  
+  
+            </div>
+            <div class="card-body mx-4">
+              <h5 class="card-title">${post.title}</h5>
+              <p class="card-text">${post.description}</p>
+            </div>
+          </div>
+          <br>`;
+      });
+    }
+  
+  
+    // Add post
+    document.getElementById("addPostForm").addEventListener('submit', (e) => {
+      e.preventDefault();
+    
+      const titleValue = document.querySelector('#title').value;
+      const descriptionValue = document.querySelector('#description').value;
+    
+      // Fetch the last ID from the server
+      fetch("http://localhost:3000/tasks")
+        .then(response => response.json())
+        .then(data => {
+          // Get the last ID
+          const lastId = data[data.length - 1].id;
+          // Increment the last ID by one
+          const newId = lastId + 1;
+    
+          // Post the new task with the new ID
+          fetch("http://localhost:3000/tasks", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: newId, title: titleValue, description: descriptionValue })
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              alert("Task added successfully");
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("Failed to add task");
+            });
+        })
+        .catch(error => {
+          console.error("Error fetching last ID:", error);
+          alert("Failed to add task");
+        });
+    });
+    
+  
+  
+  });
+  
+  
+  function completeTask(title) {
+    const completeTasks = document.querySelector('.complete');
+    completeTasks.innerHTML += `<p>${title}</p>`;
   }
+    // Edit post
+    function editPost(id) {
+      fetch(`http://localhost:3000/tasks/${id}`)
+        .then((data) => data.json())
+        .then((post) => {
+          const update_container = document.getElementById("update_container");
+  
+          update_container.innerHTML = `
+            <div class="Form" id="update_container">
+              <div class="mb-3">
+                <label for="title_update" class="form-label">Task Title</label>
+                <input type="title" class="form-control" value="${post.title}" id="title_update" placeholder="title">
+              </div>
+              <div class="mb-3">
+                <label for="description_update" class="form-label">Description</label>
+                <textarea class="form-control" id="description_update" rows="3">${post.description}</textarea>
+              </div>
+            </div>
+  
+            <button onClick="update_post(${id})" type="submit" class="bg-primary">Submit</button>`;
+        });
+    }
+  
+    // Update
+    function update_post(id) {
+      const title = document.getElementById("title_update").value;
+      const description = document.getElementById("description_update").value;
+  
+      fetch(`http://localhost:3000/tasks/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: title, description: description }),
+      })
+        .then((data) => data.json())
+        .then((response) => {
+          alert("Task updated successfully");
+        });
+    }
+  
+    // Delete function
+    function deletePost(id) {
+      fetch(`http://localhost:3000/tasks/${id}`, {
+        method: "DELETE",
+      })
+        .then((data) => data.json())
+        .then((posts) => {
+          displayPosts(posts);
+        });
+    }
   

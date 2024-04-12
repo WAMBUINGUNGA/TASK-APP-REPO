@@ -1,89 +1,34 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "type": "personal",
-      "description": "Complete laundry",
-      "completed": false
+      "id": "1",
+      "title": "EXPLORE NAIVASHA",
+      "description": "SAFARI RALLY TINGS"
     },
     {
-      "id": 2,
-      "type": "work",
-      "description": "Prepare presentation",
-      "completed": true
+      "id": "2",
+      "title": "good place,",
+      "description": "weekend"
     },
     {
-      "id": 3,
-      "type": "study",
-      "description": "Read Javascript",
-      "completed": false
+      "id": "3",
+      "title": "WEDNESDAY",
+      "description": "GOOD TO BE HOME"
     },
     {
-      "id": 4,
-      "type": "other",
-      "description": "Go for shopping",
-      "completed": true
+      "id": "4",
+      "title": "School",
+      "description": "Lecture react"
     },
     {
-      "id": "8478",
-      "text": "Do homework",
-      "completed": false
+      "id": "5",
+      "title": "Mum's Event",
+      "description": "I will go to the market,by the chairs ,decorate and setup the place for my mum's birthday by tomorrow"
     },
     {
-      "id": "1e37",
-      "completed": false
-    },
-    {
-      "id": "6ba3",
-      "completed": false
-    },
-    {
-      "id": "60ad",
-      "completed": false
-    },
-    {
-      "id": "1aa3",
-      "completed": false
-    },
-    {
-      "id": "fa3d",
-      "completed": false
-    },
-    {
-      "id": "5b17",
-      "completed": false
-    },
-    {
-      "id": "b0cd",
-      "completed": false
-    },
-    {
-      "id": "bace",
-      "completed": false
-    },
-    {
-      "id": "2f5a",
-      "completed": false
-    },
-    {
-      "id": "120e",
-      "completed": false
-    },
-    {
-      "id": "1f73",
-      "completed": false
-    },
-    {
-      "id": "5cd9",
-      "completed": false
-    },
-    {
-      "id": "0d11",
-      "completed": false
-    },
-    {
-      "id": "1f1e",
-      "completed": false
+      "id": "51",
+      "title": "Attend The Wedding",
+      "description": "attend the wedding at Karen"
     }
   ]
 }
