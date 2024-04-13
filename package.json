@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "json-server": "^0.17.4",
-    "server": "^1.0.39"
-  }
-}

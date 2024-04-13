@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   
   // Fetch Tasks
-  fetch("http://localhost:3000/tasks")
+  fetch("https://task-app-repo-6.onrender.com/tasks")
     .then((data) => data.json())
     .then((posts) => {
       displayPosts(posts);
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const descriptionValue = document.querySelector('#description').value;
   
     // Fetch the last ID from the server
-    fetch("http://localhost:3000/tasks")
+    fetch("https://task-app-repo-6.onrender.com/tasks")
       .then(response => response.json())
       .then(data => {
         // Get the last ID
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const newId = lastId + 1;
   
         // Post the new task with the new ID
-        fetch("http://localhost:3000/tasks", {
+        fetch("https://task-app-repo-6.onrender.com/tasks", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ id: newId, title: titleValue, description: descriptionValue })
@@ -88,7 +88,7 @@ function completeTask(title) {
 }
   // Edit post
   function editPost(id) {
-    fetch(`http://localhost:3000/tasks/${id}`)
+    fetch(`https://task-app-repo-6.onrender.com/tasks/${id}`)
       .then((data) => data.json())
       .then((post) => {
         const update_container = document.getElementById("update_container");
@@ -114,7 +114,7 @@ function completeTask(title) {
     const title = document.getElementById("title_update").value;
     const description = document.getElementById("description_update").value;
 
-    fetch(`http://localhost:3000/tasks/${id}`, {
+    fetch(`https://task-app-repo-6.onrender.com/tasks/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title: title, description: description }),
@@ -127,7 +127,7 @@ function completeTask(title) {
 
   // Delete function
   function deletePost(id) {
-    fetch(`http://localhost:3000/tasks/${id}`, {
+    fetch(`https://task-app-repo-6.onrender.com/tasks/${id}`, {
       method: "DELETE",
     })
       .then((data) => data.json())
