@@ -16,8 +16,8 @@ Setup/Installation Requirements
 
 Live link
 
-Deployed Frontend can be accessed here Blog
-Deployed Backend can be accessed here Blog
+Deployed Frontend can be accessed here Blog https://wambuingunga.github.io/TASK-APP-REPO/
+Deployed Backend can be accessed here Blog https://task-app-repo-6.onrender.com/tasks
 
 Known Bugs
 
