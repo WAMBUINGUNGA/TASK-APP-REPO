@@ -1,5 +1,5 @@
-TASKBlog
-The app is a simple Blog project, 10/04/2024
+TASKAPP
+The app is a simple App Blog project, 10/04/2024
 By REGINA NGUNGA
 Project Description
 

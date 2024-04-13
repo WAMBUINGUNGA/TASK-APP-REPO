@@ -1,0 +1,34 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "EXPLORE NAIVASHA",
+      "description": "SAFARI RALLY TINGS"
+    },
+    {
+      "id": "2",
+      "title": "good place,",
+      "description": "weekend"
+    },
+    {
+      "id": "3",
+      "title": "WEDNESDAY",
+      "description": "GOOD TO BE HOME"
+    },
+    {
+      "id": "4",
+      "title": "School",
+      "description": "Lecture react"
+    },
+    {
+      "id": "5",
+      "title": "Mum's Event",
+      "description": "I will go to the market,by the chairs ,decorate and setup the place for my mum's birthday by tomorrow"
+    },
+    {
+      "id": "51",
+      "title": "Attend The Wedding",
+      "description": "attend the wedding at Karen"
+    }
+  ]
+}
